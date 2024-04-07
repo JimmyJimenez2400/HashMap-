@@ -1,12 +1,12 @@
-import Node from './node';
+import Node from '../LinkedList/node.js';
 class LinkedList {
   constructor(headNode = null) {
     this.headNode = headNode;
     this.listSize = 0;
   }
 
-  append(value) {
-    let newNode = new Node(value);
+  append(key, value) {
+    let newNode = new Node(key, value);
 
     //if list is empty or headNode is null
     if (this.headNode === null) {
