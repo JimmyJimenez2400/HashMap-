@@ -24,32 +24,50 @@ class HashMap {
   set(key, value) {
     let hashedKey = this.hash(key);
 
-    let index = hashedKey; //call hash function to return value
-    console.log(`Index is: ${index}`)
+    let index = hashedKey;
+
 
     if(index < 0 || index >= this.capacity) {
       throw new Error("Trying to access index out of bound");
-    }else if(){
-
+    }else{
+      console.log(this.hashMapArray[index].append(key, value));
+      
     }
-    else{
-      this.hashMapArray[index].append(key, value);
-    }
-
-    console.log(this.hashMapArray)
-
+    
   }
 
   get(key) {
     // hash the argument
   }
 
-  has() {}
+  has(key) {
+    
+  }
+
+  remove(key){}
+
+  length(){
+
+  }
+
+  clear(){
+
+  }
+
+  keys(){}
+
+  values(){}
+
+  entries(){}
 
 }
 
 let test1 = new HashMap();
-console.log(test1);
-console.log(test1.set("John", "Smith"));
-console.log(test1.set("Johnny", "Smother"));
-console.log(test1.set("John", "Smith"));
+
+console.log(test1.hash("Carlos"));
+
+console.log(test1.hash("Carla"));
+
+
+
+

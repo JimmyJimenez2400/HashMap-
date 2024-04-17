@@ -80,11 +80,11 @@ class LinkedList {
     }
   }
 
-  find(value) {
+  find(key) {
     let current = this.headNode;
 
     for (let index = 0; index < this.size(); index++) {
-      if (current.value === value) {
+      if (current.key === key) {
         return index;
       }
       current = current.nextNode;
