@@ -27,46 +27,65 @@ class HashMap {
     let index = hashedKey;
 
 
+
     if(index < 0 || index >= this.capacity) {
       throw new Error("Trying to access index out of bound");
+      // we should expland the hashmap or load factor
+    }else if(this.has(key, index)){
+      console.log("OVERWRITING");
+      let findKeyInBucket = this.hashMapArray[index].find(key);
+      findKeyInBucket.value = value;
+
     }else{
-      console.log(this.hashMapArray[index].append(key, value));
-      
+      this.hashMapArray[index].append(key, value);
+      console.log(`Setting ${key} to ${value} at ${index} to ${this.hashMapArray[index]}`);
+      console.log(this.hashMapArray[index]);
+
     }
-    
   }
 
-  get(key) {
-    // hash the argument
+  display(index){
+    // display the bucket we want to see.
+    console.log(this.hashMapArray[index]);
   }
 
-  has(key) {
-    
+  has(key, index){
+    let bucketSize = this.hashMapArray[index].size()
+
+    let  current =  this.hashMapArray[index].head();
+
+    for(let i = 0; i < bucketSize; i++){
+      let nodeKey = current.key;
+
+      if(nodeKey === key){
+        console.log("MATCH FOUND");
+        return true;
+      }else{
+        console.log("MATCH NOT FOUND");
+        current = current.nextNode;
+      }
+    }
+
+    return false;
   }
-
-  remove(key){}
-
-  length(){
-
-  }
-
-  clear(){
-
-  }
-
-  keys(){}
-
-  values(){}
-
-  entries(){}
-
 }
 
 let test1 = new HashMap();
 
-console.log(test1.hash("Carlos"));
+test1.set("John", "Doe");
+test1.set("John", "MARK");
+test1.set("John", "Doe");
+test1.set("John", "MARK");
+test1.set("John", "Doe");
+test1.set("John", "MARK");
+test1.set("John", "Doe");
+test1.set("John", "MARK");
+test1.set("John", "Doe");
+test1.set("John", "MARK");
 
-console.log(test1.hash("Carla"));
+test1.display(11);
+
+
 
 
 

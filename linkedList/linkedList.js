@@ -85,12 +85,12 @@ class LinkedList {
 
     for (let index = 0; index < this.size(); index++) {
       if (current.key === key) {
-        return index;
+        return current;
       }
       current = current.nextNode;
     }
 
-    return null;
+    return false;
   }
 
   toString() {
