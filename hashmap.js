@@ -26,20 +26,16 @@ class HashMap {
 
     let index = hashedKey;
 
-
-
     if(index < 0 || index >= this.capacity) {
       throw new Error("Trying to access index out of bound");
       // we should expland the hashmap or load factor
     }else if(this.has(key, index)){
-      console.log("OVERWRITING");
+      
       let findKeyInBucket = this.hashMapArray[index].find(key);
       findKeyInBucket.value = value;
 
     }else{
       this.hashMapArray[index].append(key, value);
-      console.log(`Setting ${key} to ${value} at ${index} to ${this.hashMapArray[index]}`);
-      console.log(this.hashMapArray[index]);
 
     }
   }
@@ -49,7 +45,7 @@ class HashMap {
     console.log(this.hashMapArray[index]);
   }
 
-  has(key, index){
+  has(key, index){ // edit this one, so it doesn't use two arguments, only "key".
     let bucketSize = this.hashMapArray[index].size()
 
     let  current =  this.hashMapArray[index].head();
@@ -58,32 +54,68 @@ class HashMap {
       let nodeKey = current.key;
 
       if(nodeKey === key){
-        console.log("MATCH FOUND");
         return true;
       }else{
-        console.log("MATCH NOT FOUND");
         current = current.nextNode;
       }
     }
 
     return false;
   }
+
+  hasV2(key){
+    for(let i  = 0; i < this.capacity; i++){
+      let current = this.hashMapArray[i].head();
+
+      while(current){
+        if(current.key = key){
+          return true;
+        }else{
+          current = current.nextNode;
+
+        }
+      }
+    }
+
+    return false; 
+  }
+
+  get(key){
+    for(let i = 0; i < this.capacity; i++){
+      console.log(this.hashMapArray[i]);
+      console.log(this.hashMapArray[i].head())
+
+      let current = this.hashMapArray[i].head();
+
+      while(current){
+        let currentKey = current.key;
+
+
+        if(key === currentKey){
+          console.log("KEY FOUND");
+          console.log(current.value);
+          return current.value;
+        }else{
+          current = current.nextNode;
+        }
+      }
+
+    }
+
+    return false;
+  }
+
+  remove(key){
+
+  }
 }
 
 let test1 = new HashMap();
 
 test1.set("John", "Doe");
-test1.set("John", "MARK");
-test1.set("John", "Doe");
-test1.set("John", "MARK");
-test1.set("John", "Doe");
-test1.set("John", "MARK");
-test1.set("John", "Doe");
-test1.set("John", "MARK");
-test1.set("John", "Doe");
-test1.set("John", "MARK");
+test1.set("Mike", "LMAO");
 
-test1.display(11);
+console.log(test1.hasV2("John"));
 
 
 
