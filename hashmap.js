@@ -40,39 +40,22 @@ class HashMap {
     }
   }
 
-  display(index){
+  display(){
     // display the bucket we want to see.
-    console.log(this.hashMapArray[index]);
+    return this.hashMapArray;
   }
 
-  has(key, index){ // edit this one, so it doesn't use two arguments, only "key".
-    let bucketSize = this.hashMapArray[index].size()
 
-    let  current =  this.hashMapArray[index].head();
-
-    for(let i = 0; i < bucketSize; i++){
-      let nodeKey = current.key;
-
-      if(nodeKey === key){
-        return true;
-      }else{
-        current = current.nextNode;
-      }
-    }
-
-    return false;
-  }
-
-  hasV2(key){
+  has(key){
     for(let i  = 0; i < this.capacity; i++){
       let current = this.hashMapArray[i].head();
 
       while(current){
-        if(current.key = key){
+        if(current.key === key){
+          console.log("TRUE");
           return true;
         }else{
           current = current.nextNode;
-
         }
       }
     }
@@ -95,9 +78,8 @@ class HashMap {
           console.log("KEY FOUND");
           console.log(current.value);
           return current.value;
-        }else{
-          current = current.nextNode;
         }
+        current = current.nextNode;
       }
 
     }
@@ -115,7 +97,8 @@ let test1 = new HashMap();
 test1.set("John", "Doe");
 test1.set("Mike", "LMAO");
 
-console.log(test1.hasV2("John"));
+// test1.has("John");
+console.log(test1.display());
 
 
 
