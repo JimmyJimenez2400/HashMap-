@@ -88,6 +88,46 @@ class HashMap {
   }
 
   remove(key){
+    for(let i = 0; i < this.capacity; i++){
+      let current = this.hashMapArray
+    }
+  }
+
+  length(){
+    let size = 0;
+
+    for(let i = 0; i < this.capacity; i++){
+      let current = this.hashMapArray[i].head();
+      while(current){
+        if(current !== null){
+          size++;
+        }
+        current = current.nextNode;
+      }
+    }
+    console.log(size);
+    return size;
+  }
+
+  clear(){
+    return this.hashMapArray = Array.from({length: this.capacity}, () => new LinkedList());
+  }
+
+  keys(){
+
+    let keysInArray = [];
+    for(let i = 0; i < this.capacity; i++){
+      let current = this.hashMapArray[i].head();
+
+      if(current !== null){
+        console.log(current.key);
+        keysInArray.push(current.key);
+      }
+    }
+
+    return keysInArray;
+  }
+  values(){
 
   }
 }
@@ -96,12 +136,12 @@ let test1 = new HashMap();
 
 test1.set("John", "Doe");
 test1.set("Mike", "LMAO");
+test1.set("Susan", "Wright");
+test1.set("Mark", "Hamilton");
 
-// test1.has("John");
-console.log(test1.display());
+test1.length();
 
-
-
+console.log(test1.keys());
 
 
 
