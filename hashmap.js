@@ -40,9 +40,9 @@ class HashMap {
     }
   }
 
-  display(){
+  display(i){
     // display the bucket we want to see.
-    return this.hashMapArray;
+    return this.hashMapArray[i];
   }
 
 
@@ -89,8 +89,32 @@ class HashMap {
 
   remove(key){
     for(let i = 0; i < this.capacity; i++){
-      let current = this.hashMapArray
+      let current = this.hashMapArray[i].head();
+      let previous = null;
+
+      while(current !== null){
+        let nextNode = current.nextNode;
+        let currentKey = current.key;
+
+        if(currentKey === key){
+          if(previous === null){
+            this.hashMapArray[i].headNode = nextNode;
+          
+
+          }else{
+            previous.nextNode = nextNode;
+            console.log(previous);
+          }
+
+          return true;
+        }
+        
+        previous = current;
+        current = current.nextNode;
+      }
     }
+
+    return false;
   }
 
   length(){
@@ -120,15 +144,63 @@ class HashMap {
       let current = this.hashMapArray[i].head();
 
       if(current !== null){
-        console.log(current.key);
-        keysInArray.push(current.key);
+        while(current){
+
+          let key = current.key;
+          
+
+          keysInArray.push(key);
+
+          current = current.nextNode;
+        }
       }
     }
 
     return keysInArray;
   }
   values(){
+    let valuesInArray = [];
+    for(let i = 0; i < this.capacity; i++){
+      let current = this.hashMapArray[i].head();
 
+      if(current !== null){
+        while(current){
+
+          let value = current.value;
+
+          valuesInArray.push(value);
+
+          current = current.nextNode;
+        }
+      }
+    }
+
+    return valuesInArray;
+  }
+
+  entries(){
+
+    let entryStorage = [];
+    for(let i = 0; i < this.capacity; i++){
+
+      let current = this.hashMapArray[i].head();
+
+      
+      if(current !== null){
+        
+        while(current){
+
+          let key = current.key;
+          let value = current.value;
+
+          entryStorage.push([key, value]);
+
+          current = current.nextNode;
+        }
+      }
+      
+    }
+    return entryStorage;
   }
 }
 
@@ -137,11 +209,13 @@ let test1 = new HashMap();
 test1.set("John", "Doe");
 test1.set("Mike", "LMAO");
 test1.set("Susan", "Wright");
-test1.set("Mark", "Hamilton");
+test1.set("Wendal", "Soe");
+test1.set("Mark", "Lucas");
+test1.set("Mason", "Jimenez");
 
-test1.length();
+console.log(test1.display(14));
 
-console.log(test1.keys());
+test1.remove("Mason");
 
-
-
+console.log("After Remove: ");
+console.log(test1.display(14));
