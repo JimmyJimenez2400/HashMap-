@@ -34,10 +34,10 @@ class HashMap {
     }else if(this.has(key, index)){
       
       let findKeyInBucket = this.hashMapArray[index].find(key);
-      findKeyInBucket.value = value;
+      findKeyInBucket.value = value; // If the key already exists, then the it will replace the old value to the new value
 
     }else{
-      this.hashMapArray[index].append(key, value);
+      this.hashMapArray[index].append(key, value); //Set key + value to LinkedList. (hashMapArray is the container: '[]')
 
     }
 
@@ -68,27 +68,18 @@ class HashMap {
   }
 
   get(key){
-    for(let i = 0; i < this.capacity; i++){
-      console.log(this.hashMapArray[i]);
-      console.log(this.hashMapArray[i].head())
+    let hashKey = this.hash(key);
+    let bucket = this.hashMapArray[hashKey];
+    let current = bucket.head();
 
-      let current = this.hashMapArray[i].head();
-
-      while(current){
-        let currentKey = current.key;
-
-
-        if(key === currentKey){
-          console.log("KEY FOUND");
-          console.log(current.value);
-          return current.value;
-        }
-        current = current.nextNode;
+    while(current){
+      let currentKey = current.key;
+      if(currentKey === key){
+        return current.value;
       }
-
+      current = current.nextNode;
     }
-
-    return false;
+    return null; // only if the key doesn't exist
   }
 
   GrowBucket(){
@@ -241,19 +232,18 @@ class HashMap {
 let test = new HashMap();
 
 test.set('apple', 'red')
-test.set('banana', 'yellow')
-test.set('carrot', 'orange')
-test.set('dog', 'brown')
-test.set('elephant', 'gray')
-test.set('frog', 'green')
-test.set('grape', 'purple')
-test.set('hat', 'black')
-test.set('carlos', 'hey')
-test.set('carla', 'HEYYY');
-test.set('Something', 'Else');
-test.set('We', 'Here');
-test.set('Dont', 'lol');
+ test.set('banana', 'yellow')
+ test.set('carrot', 'orange')
+ test.set('dog', 'brown')
+ test.set('elephant', 'gray')
+ test.set('frog', 'green')
+ test.set('grape', 'purple')
+ test.set('hat', 'black')
+ test.set('ice cream', 'white')
+ test.set('jacket', 'blue')
+ test.set('kite', 'pink')
+ test.set('lion', 'golden')
 
-test.set('Somewhere', 'lol');
 
-test.set('LMAOOOOO', 'lol');
+test.getV2('frog');
+
