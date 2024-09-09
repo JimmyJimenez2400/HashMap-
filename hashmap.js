@@ -8,6 +8,8 @@ class HashMap {
     this.hashMapArray = Array.from({length: defaultArraySize}, () => new LinkedList());
   }
 
+  
+
   hash(key){
     let hashCode = 0;
 
@@ -27,7 +29,7 @@ class HashMap {
     let index = hashedKey;
 
     if(index < 0 || index >= this.capacity) {
-      throw new Error("Trying to access index out of bound");
+      console.log(this.GrowBucket());
       // we should expland the hashmap or load factor
     }else if(this.has(key, index)){
       
@@ -38,6 +40,8 @@ class HashMap {
       this.hashMapArray[index].append(key, value);
 
     }
+
+    return this.hashMapArray;
   }
 
   display(i){
@@ -85,6 +89,36 @@ class HashMap {
     }
 
     return false;
+  }
+
+  GrowBucket(){
+    let maxSize = this.capacity * this.loadFactor;
+    console.log(`maxSize Allowed: ${maxSize}`);
+
+    let entriesInHashMap = this.length();
+    console.log(`entriesInHashMap: ${entriesInHashMap}`)
+
+    let doubleSizeOfBucket = this.capacity*2;
+
+    let oldBucket = this.hashMapArray;
+
+    if(entriesInHashMap > maxSize){
+      console.log("TRUE");
+      let newBucket = Array.from({length: doubleSizeOfBucket}, (x) => x); // This part needs to add the items from the old linkedlist (bucket) to new linkedList (bucket);
+      console.log(`New Bucket Length: ${newBucket.length}`);
+      this.hashMapArray = newBucket;
+      console.log(this.hashMapArray);
+
+      return true;
+    }else{
+      console.log("FALSE");
+    }
+
+
+
+
+    
+    return oldBucket;
   }
 
   remove(key){
@@ -204,18 +238,22 @@ class HashMap {
   }
 }
 
-let test1 = new HashMap();
+let test = new HashMap();
 
-test1.set("John", "Doe");
-test1.set("Mike", "LMAO");
-test1.set("Susan", "Wright");
-test1.set("Wendal", "Soe");
-test1.set("Mark", "Lucas");
-test1.set("Mason", "Jimenez");
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('carlos', 'hey')
+test.set('carla', 'HEYYY');
+test.set('Something', 'Else');
+test.set('We', 'Here');
+test.set('Dont', 'lol');
 
-console.log(test1.display(14));
+test.set('Somewhere', 'lol');
 
-test1.remove("Mason");
-
-console.log("After Remove: ");
-console.log(test1.display(14));
+test.set('LMAOOOOO', 'lol');
