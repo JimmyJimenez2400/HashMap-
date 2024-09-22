@@ -8,8 +8,6 @@ class HashMap {
     this.hashMapArray = Array.from({length: defaultArraySize}, () => new LinkedList());
   }
 
-  
-
   hash(key){
     let hashCode = 0;
 
@@ -40,8 +38,6 @@ class HashMap {
       this.hashMapArray[index].append(key, value); //Set key + value to LinkedList. (hashMapArray is the container: '[]')
 
     }
-
-    return this.hashMapArray;
   }
 
   display(i){
@@ -91,25 +87,33 @@ class HashMap {
 
     let doubleSizeOfBucket = this.capacity*2;
 
-    let oldBucket = this.hashMapArray;
+    let oldBucketEntries = this.entries();
+
 
     if(entriesInHashMap > maxSize){
       console.log("TRUE");
-      let newBucket = Array.from({length: doubleSizeOfBucket}, (x) => x); // This part needs to add the items from the old linkedlist (bucket) to new linkedList (bucket);
-      console.log(`New Bucket Length: ${newBucket.length}`);
+      let newBucket = Array.from({length: doubleSizeOfBucket}, () => new LinkedList());
       this.hashMapArray = newBucket;
-      console.log(this.hashMapArray);
 
-      return true;
+
+      for(let i = 0; i < oldBucketEntries.length; i++){
+
+        let key = oldBucketEntries[i][0];
+        let value = oldBucketEntries[i][1];
+
+        console.log(key, value);
+
+        this.set(key, value);
+      }
+
+      this.capacity = doubleSizeOfBucket;
+
+      return newBucket;
+
     }else{
-      console.log("FALSE");
+      console.log('Max size not reached.');
     }
 
-
-
-
-    
-    return oldBucket;
   }
 
   remove(key){
@@ -243,7 +247,9 @@ test.set('apple', 'red')
  test.set('jacket', 'blue')
  test.set('kite', 'pink')
  test.set('lion', 'golden')
+ test.set('meanie ', 'lol')
 
 
-test.getV2('frog');
+test.GrowBucket();
+test.GrowBucket();
 
