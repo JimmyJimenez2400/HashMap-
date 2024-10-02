@@ -9,5 +9,5 @@ It uses a hash function to map keys to specific indexes (or buckets) in an under
 
 # About
 
-This was one of the projects given by The Odin project to create a Hasmap [https://www.theodinproject.com/lessons/javascript-hashmap]. To understand how hashing works and why it's used. 
+This was one of the projects given by The Odin project to create a [Hasmap](https://www.theodinproject.com/lessons/javascript-hashmap). To understand how hashing works and why it's used. 
 
